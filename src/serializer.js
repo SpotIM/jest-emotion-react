@@ -1,5 +1,5 @@
 const css = require('css')
-const {sheet} = require('emotion/dist/sheet')
+const {sheet} = require('emotion/dist/index.cjs.js')
 
 const serializer = {test, print}
 
