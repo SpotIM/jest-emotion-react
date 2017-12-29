@@ -1,6 +1,6 @@
 {
   "name": "@spotim/jest-emotion-react",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Jest utilities for Glamor and React",
   "main": "dist/index.js",
   "scripts": {
@@ -8,9 +8,6 @@
     "test": "nps test",
     "commitmsg": "opt --in commit-msg --exec \"validate-commit-msg\""
   },
-  "files": [
-    "dist"
-  ],
   "keywords": [],
   "license": "MIT",
   "dependencies": {
