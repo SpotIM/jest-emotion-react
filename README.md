@@ -1,4 +1,5 @@
-# jest-glamor-react
+@SPOTIM FOR NOTES - only changed `emotion/lib/sheet` to `emotion/dist/sheet` to support v7.3.2 
+# jest-emotion-react
 
 Jest utilities for Glamor and React
 

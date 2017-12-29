@@ -1,5 +1,5 @@
 {
-  "name": "jest-emotion-react",
+  "name": "@spotim/jest-emotion-react",
   "version": "0.0.2",
   "description": "Jest utilities for Glamor and React",
   "main": "dist/index.js",
