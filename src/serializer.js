@@ -1,6 +1,6 @@
 const css = require('css')
 const {sheet} = require('emotion/dist/index.cjs.js')
-
+const {paramCase} = require('change-case-object');
 const serializer = {test, print}
 
 module.exports = serializer
@@ -60,17 +60,27 @@ function getSelectorsFromProps(selectors, props) {
 }
 
 function getStyles(nodeSelectors) {
-  const styles = sheet.tags
-    .map(tag => /* istanbul ignore next */ tag.textContent || '')
-    .join('\n')
-  const ast = css.parse(styles)
+  // const styles = sheet.tags
+  //   .map(tag => /* istanbul ignore next */ tag.textContent || '')
+  //   .join('\n')
+  const styles = Object.entries(sheet.registered).reduce((stylesheet, [key, val]) => {
+    stylesheet += `.css-${key} {
+      ${Object.entries(paramCase(val.style)).reduce((style, [propKey, propVal]) => {
+      style += `${propKey}: ${propVal};
+      `;
+      return style;
+    }, "")}
+    }`;
+    return stylesheet;
+  }, "");
+
+  const ast = css.parse(styles);
   const rules = ast.stylesheet.rules.filter(filter)
   const mediaQueries = getMediaQueries(ast, filter)
-
   ast.stylesheet.rules = [...rules, ...mediaQueries]
 
-  const ret = css.stringify(ast)
-  return ret
+  const ret = css.stringify(ast);
+  return ret;
 
   function filter(rule) {
     if (rule.type === 'rule') {
@@ -88,7 +98,7 @@ function getMediaQueries(ast, filter) {
     acc,
     mediaQuery,
   ) => {
-    mediaQuery.rules = mediaQuery.rules.filter(filter)
+    mediaQuery.rules = mediaQuery.rules.filter(filter);
 
     if (mediaQuery.rules.length) {
       return acc.concat(mediaQuery)
